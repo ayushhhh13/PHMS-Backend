@@ -1,10 +1,10 @@
 import express from 'express';
 import { getAvailableSlots, addSlot } from '../controllers/slotController.js';
 
-const router = express.Router();
+const slotRoutes = express.Router();
 
-router.get('/', getAvailableSlots);
+slotRoutes.get('/', getAvailableSlots);
 
-router.post('/', addSlot);
+slotRoutes.post('/', addSlot);
 
-export default router;
+export default slotRoutes;

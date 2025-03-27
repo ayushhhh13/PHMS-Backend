@@ -4,7 +4,7 @@ import generateToken from '../utils/generateToken.js';
 import bcrypt from 'bcryptjs';
 
 //  Register new student
-export const registerUser = asyncHandler(async (req, res) => {
+const registerStudent = asyncHandler(async (req, res) => {
     const { name, email, password, roll_number, mobile } = req.body;
     const userExists = await Student.findOne({ where: { email } });
 
@@ -20,7 +20,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 });
 
 //  Login student & get JWT token
-export const loginUser = asyncHandler(async (req, res) => {
+const loginStudent = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     const student = await Student.findOne({ where: { email } });
 
@@ -30,3 +30,5 @@ export const loginUser = asyncHandler(async (req, res) => {
         res.status(401).json({ message: 'Invalid email or password' });
     }
 });
+
+export { registerStudent, loginStudent}
