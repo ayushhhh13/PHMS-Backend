@@ -1,5 +1,5 @@
 import asyncHandler from '../middlewares/asyncHandler.js';
-import Student from '../models/studentModel.js';
+import {Student} from '../config/db.js';
 import generateToken from '../utils/generateToken.js';
 import bcrypt from 'bcryptjs';
 
@@ -16,7 +16,7 @@ const registerStudent = asyncHandler(async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const student = await Student.create({ name, email, password: hashedPassword, roll_number, mobile });
 
-    res.status(201).json({ token: generateToken(student.id) });
+    res.status(201);
 });
 
 //  Login student & get JWT token

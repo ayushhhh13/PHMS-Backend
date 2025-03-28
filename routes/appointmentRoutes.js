@@ -7,13 +7,13 @@ import {
 } from '../controllers/appointmentController.js';
 import authMiddleware from '../middlewares/authMiddleware.js';
 
-const router = express.Router();
-router.post('/book', authMiddleware, bookAppointment);
+const appointmentRoutes = express.Router();
+appointmentRoutes.post('/book', authMiddleware, bookAppointment);
 
-router.put('/cancel/:id', authMiddleware, cancelAppointment);
+appointmentRoutes.put('/cancel/:id', authMiddleware, cancelAppointment);
 
-router.put('/reschedule/:id', authMiddleware, rescheduleAppointment);
+appointmentRoutes.put('/reschedule/:id', authMiddleware, rescheduleAppointment);
 
-router.get('/', authMiddleware, getAppointments);
+appointmentRoutes.get('/', authMiddleware, getAppointments);
 
-export default router;
+export default appointmentRoutes;

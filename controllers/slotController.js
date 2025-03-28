@@ -1,16 +1,22 @@
-import asyncHandler from '../middlewares/asyncHandler.js';
-import Slot from '../models/slotModel.js';
+import asyncHandler from "../middlewares/asyncHandler.js";
+import { Slot } from "../config/db.js";
 
 // Get available slots
 export const getAvailableSlots = asyncHandler(async (req, res) => {
-    const slots = await Slot.findAll({ where: { status: 'available' } });
-    res.json(slots);
+  const slots = await Slot.findAll({ where: { status: "available" } });
+  res.json(slots);
 });
 
-// Add a new slot
-export const addSlot = asyncHandler(async (req, res) => {
-    const { start_time, end_time, duration, date } = req.body;
+export const bookSlot = asyncHandler(async (req, res) => {
+  const { date, startTime, endTime } = req.body;
+  const slot = await Slot.findOne({
+    where: { date: date, start_time: startTime, end_time: endTime, status: 'available' },
+  });
+  if (!slot) {
+    return res.status(404).json({ message: "Slot not available" });
+  }
 
-    const slot = await Slot.create({ start_time, end_time, duration, date, status: 'available' });
-    res.status(201).json({ message: 'Slot added successfully', slot });
+  slot.status = "booked";
+  await slot.save();
+  res.json(slot.id);
 });

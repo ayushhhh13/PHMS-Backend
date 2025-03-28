@@ -1,10 +1,11 @@
 import express from 'express';
-import { getAvailableSlots, addSlot } from '../controllers/slotController.js';
+import { bookSlot, getAvailableSlots } from '../controllers/slotController.js';
+import authMiddleware from '../middlewares/authMiddleware.js';
 
 const slotRoutes = express.Router();
 
-slotRoutes.get('/', getAvailableSlots);
+slotRoutes.get('/get', authMiddleware,getAvailableSlots);
+slotRoutes.post('/book', authMiddleware,bookSlot);
 
-slotRoutes.post('/', addSlot);
 
 export default slotRoutes;

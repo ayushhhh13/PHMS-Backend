@@ -1,6 +1,5 @@
 import asyncHandler from '../middlewares/asyncHandler.js';
-import Appointment from '../models/appointmentModel.js';
-import Slot from '../models/slotModel.js';
+import {Slot, Appointment} from '../config/db.js';
 
 // Book an appointment
 export const bookAppointment = asyncHandler(async (req, res) => {

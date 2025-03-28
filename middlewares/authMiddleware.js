@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
-import Student from '../models/studentModel.js';
-
+import { Student } from '../config/db.js';
 const authMiddleware = async (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
     
