@@ -7,5 +7,4 @@ const slotRoutes = express.Router();
 slotRoutes.get('/get', authMiddleware,getAvailableSlots);
 slotRoutes.post('/book', authMiddleware,bookSlot);
 
-
 export default slotRoutes;
