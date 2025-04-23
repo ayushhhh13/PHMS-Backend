@@ -11,10 +11,18 @@ const sequelize = new Sequelize(
   process.env.DB_PASS,
   {
     host: process.env.DB_HOST,
+    port: process.env.DB_PORT, // Don't forget to set this in .env
     dialect: "mysql",
     logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false, // This disables strict SSL cert verification (often required for managed DBs)
+      },
+    },
   }
 );
+
 
 const connectDB = async () => {
   try {
