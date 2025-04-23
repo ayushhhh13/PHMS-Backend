@@ -11,4 +11,3 @@ numpy
 pandas
 pickle-mixin
 python-dotenv
-openai

@@ -96,11 +96,19 @@ export const getAppointments = asyncHandler(async (req, res) => {
 
 export const getTodaysAppointments = asyncHandler(async (req, res) => {
   try {
-    const today = new Date().toISOString().split("T")[0]; // format: 'YYYY-MM-DD'
-
+    const today = new Date();
+    const IST_offset = 5.5 * 60; // IST is UTC +5:30 (5.5 hours)
+    
+    // Adjust to IST time zone
+    const IST_date = new Date(today.getTime() + (IST_offset - today.getTimezoneOffset()) * 60000);
+    
+    // Format it to 'YYYY-MM-DD'
+    const formattedDate = IST_date.toISOString().split('T')[0];
+    
+  
     const appointments = await Appointment.findAll({
       where: {
-        date: today,
+        date: formattedDate,
         status: ["pending", "rescheduled"],
       },
       include: [

@@ -27,7 +27,7 @@ def get_completion(prompt, engine="gpt-4o-aispeaking"):
     response = openai.ChatCompletion.create(
             engine=engine,
             messages=messages,
-            temperature=0.0
+            temperature=0.7
         )
 
     content = response.choices[0].message["content"]
